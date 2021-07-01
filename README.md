@@ -1,60 +1,84 @@
 # JS-Array-Challenge
 
-## 자바스크립트 배열을 마스터 해보자!
+## 자바스크립트 배열 Open Source Project
 
-### 문제 풀기
+참고 사이트 : [MDN Web Docs](https://developer.mozilla.org/ko/). <br>
+자주 쓰이는 Array 메소드
 
-- (처음 clone받으면) npm install 을 한다.
+### Array.prototype.map()
 
-1. Problems에서 풀고 싶은 문제를 Challenge 폴더 본인 깃헙 아이디 폴더를 만들어 복붙한다.
-2. 문제의 README.md로 문제를 파악한다.
-3. solve.js에서 문제를 해결하는 함수를 작성한다.
-4. 문제 푼 폴더에서 jest 명령어 실행 후 통과해면 성공!
-
-### 문제 만들기
-
-1. Problems폴더에 문제 제목으로 폴더를 만든다
-2. README.md 파일에 문제 설명을 적는다
-
-```md
-ex)
-
-## 설명
-
-every를 이용해서 모든 원소가 짝수인지 아닌지를 판별하세요
-```
-
-3. solve.js를 아래와 같이 작성한다.
+map() 메서드는 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
 
 ```js
-function solution(inputArray) {}
+const array1 = [1, 4, 9, 16];
 
-exports.solution = solution;
+// pass a function to map
+const map1 = array1.map((x) => x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
 ```
 
-4. solve.test.js 에 테스트 케이스를 추가한다.
+### Array.prototype.every()
+
+every() 메서드는 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트합니다. Boolean 값을 반환합니다.
 
 ```js
-const { solution } = require('./solve');
+const isBelowThreshold = (currentValue) => currentValue < 40;
 
-const test1 = {
-  input: [2, 4, 6, 8, 10],
-  answer: true,
-};
+const array1 = [1, 30, 39, 29, 10, 13];
 
-const test2 = {
-  input: [2, 3, 6, 8, 10],
-  answer: false,
-};
+console.log(array1.every(isBelowThreshold));
+// expected output: true
+```
 
-describe('everyArray', () => {
-  test('모두 짝수면 true여야 한다.', () => {
-    expect(solution(test1.input)).toEqual(test1.answer);
-  });
+### Array.prototype.reduce()
 
-  test('홀수가 있으면 false여야 한다.', () => {
-    expect(solution(test2.input)).toEqual(test2.answer);
-  });
-});
-V;
+reduce() 메서드는 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
+
+```js
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+// 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer));
+// expected output: 10
+
+// 5 + 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer, 5));
+// expected output: 15
+```
+
+### Array.prototype.filter()
+
+filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
+
+```js
+const words = [
+  "spray",
+  "limit",
+  "elite",
+  "exuberant",
+  "destruction",
+  "present",
+];
+
+const result = words.filter((word) => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+```
+
+### Array.prototype.foreach()
+
+forEach() 메서드는 주어진 함수를 배열 요소 각각에 대해 실행합니다.
+
+```js
+const array1 = ["a", "b", "c"];
+
+array1.forEach((element) => console.log(element));
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
 ```
